@@ -10,3 +10,11 @@ body {
 	float: left;
 	border: solid 1px black;
 }
+
+.selected{
+	background: red;
+}
+
+.goal{
+	background: lightgreen;
+}

@@ -1,27 +1,64 @@
 <div class="row">
-	<% scale.forEach( function( note ) { %>
-		<div class="block key1" data-midi="<%= note + 24 %>"></div>
+	<% scale.forEach( function( note, i ) { %>
+		<div class="block n<%= i + 1 %>" data-midi="<%= note + 24 %>">
+
+    </div>
 	<% }) %>
 </div>
 
 <div class="row">
-	<% scale.forEach( function( note ) { %>
-		<div class="block key1" data-midi="<%= note + 36 %>"></div>
+	<% scale.forEach( function( note, i ) { %>
+		<div class="block n<%= i + 7 %>" data-midi="<%= note + 36 %>">
+
+    </div>
 	<% }) %>
 </div>
 
 <script type="text/javascript">
-$( document ).ready( function() {
-	$( '.block' ).on( 'click', function( e ) {
-        var midi = $( e.target ).data( 'midi' );
-        playMidi( midi, oscillator );
-      });
+  $( document ).ready( function() {
+  	$( '.block' ).on( 'click', function( e ) {
+      var midi = $( e.target ).data( 'midi' );
+      playMidi( midi, oscillator );
+    });
 
-      context = new AudioContext();
-      oscillator = context.createOscillator();
-      oscillator.type = 1;
-      oscillator.frequency.value = 0;
-      oscillator.connect( context.destination );
-      oscillator.noteOn(0);
-})
+    $( '.block' ).on( 'click', function( e ) {
+      if ( $( this ).hasClass('selected' )) {
+        $( this ).removeClass('selected');
+        $( this ).addClass('goal');
+      };
+    });
+
+    steps = [
+      0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0
+    ];
+
+
+    steps.forEach( function( step, index ) {
+      if( Math.random() > 0.5 ) {
+        steps[ index ] = parseInt( Math.random() * 10 );
+      }
+    });
+
+    stepIndex = 0;
+    setInterval( function() {
+      stepIndexMod = stepIndex % steps.length; 
+      if( steps[ stepIndexMod ] != 0 ) {
+        $( '.block' ).removeClass( 'selected' );
+        if( ! $( '.n' + steps[ stepIndexMod ] ).hasClass( 'goal' ) ) {
+          $( '.n' + steps[ stepIndexMod ] ).addClass( 'selected' );
+          $( '.block' ).removeClass( 'goal' );
+        }
+      }
+      stepIndex++;
+    }, 500 );
+
+    context = new AudioContext();
+    oscillator = context.createOscillator();
+    oscillator.type = 1;
+    oscillator.frequency.value = 0;
+    oscillator.connect( context.destination );
+    oscillator.noteOn(0);
+
+  });
 </script>
