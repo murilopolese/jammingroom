@@ -7,6 +7,7 @@ module.exports.routes = {
   '/play': {
   	view: 'play'
   },
-  'GET /room/:id': 'RoomController.getWithScale'
+  'GET /simplest/:id': 'InstrumentsController.simplest',
+  'GET /chords/:id': 'InstrumentsController.chordsPlayer'
 
 };

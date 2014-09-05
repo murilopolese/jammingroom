@@ -7,9 +7,15 @@
         <p><img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=http://jamroom.ngrok.com/room/<%= id %>&chld=H|0" /><p>
         <p>
         	Or share this url: 
-        	<a href="http://jamroom.ngrok.com/room/lobby/<%= id %>">
-        		http://jamroom.ngrok.com/room/lobby/<%= id %>
+        	<a href="jammingroom.herokuapp.com/room/<%= id %>">
+        		Room <%= id %>
         	</a>
+        </p>
+        <p>
+            Or play with any of this instruments: 
+            <a href="http://jammingroom.herokuapp.com/play/<%= id %>">
+                Simplest synth
+            </a>
         </p>
     </div>
 

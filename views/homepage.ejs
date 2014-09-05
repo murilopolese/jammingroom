@@ -8,3 +8,24 @@
     </div>
 
 </div>
+<script type="text/javascript">
+    $( document ).ready( function() {
+      FastClick.attach(document.body);
+      
+      $( 'button.submit' ).on( 'click', function() {
+        var chords = $( 'textarea.chords' ).val() || 'C F G';
+        chords.toUpperCase();
+        chords = chords.split( ' ' );
+        var data = {
+          chords: chords
+        }
+        $.post( '/room/create', data )
+        .done( function( result ) {
+          window.location.href = '/room/lobby/' + result.id
+        })
+        .fail( function( error ) {
+          console.log( error );
+        });
+      });
+    });
+</script>

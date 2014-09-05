@@ -1,0 +1,27 @@
+<div class="row">
+	<% scale.forEach( function( note ) { %>
+		<div class="block key1" data-midi="<%= note + 24 %>"></div>
+	<% }) %>
+</div>
+
+<div class="row">
+	<% scale.forEach( function( note ) { %>
+		<div class="block key1" data-midi="<%= note + 36 %>"></div>
+	<% }) %>
+</div>
+
+<script type="text/javascript">
+$( document ).ready( function() {
+	$( '.block' ).on( 'click', function( e ) {
+        var midi = $( e.target ).data( 'midi' );
+        playMidi( midi, oscillator );
+      });
+
+      context = new AudioContext();
+      oscillator = context.createOscillator();
+      oscillator.type = 1;
+      oscillator.frequency.value = 0;
+      oscillator.connect( context.destination );
+      oscillator.noteOn(0);
+})
+</script>

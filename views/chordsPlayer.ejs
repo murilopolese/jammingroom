@@ -1,0 +1,45 @@
+<script type="text/javascript">
+$( document ).ready( function() {
+
+  chords = [
+  <% chords.forEach( function( chord ) { %> 
+    '<%= chord %>',
+  <% }) %>
+  ];
+
+  context = new AudioContext();
+
+
+  gain = context.createGain();
+  gain.gain.value = 0.3;
+  gain.connect( context.destination );
+
+  oscillator1 = context.createOscillator();
+  oscillator1.type = 'sine';
+  oscillator1.frequency.value = 0;
+  oscillator1.connect( gain );
+  oscillator1.start(0);
+
+  oscillator2 = context.createOscillator();
+  oscillator2.type = 'sine';
+  oscillator2.frequency.value = 0;
+  oscillator2.connect( gain );
+  oscillator2.start(0);
+
+  oscillator3 = context.createOscillator();
+  oscillator3.type = 'sine';
+  oscillator3.frequency.value = 0;
+  oscillator3.connect( gain );
+  oscillator3.start(0);
+
+
+
+  i = 0;
+
+  setInterval( function() {
+    playChord( chords[ i % chords.length ] + '-4', oscillator1, oscillator2, oscillator3 );
+    i++;
+  }, 1000);
+  
+})
+</script>
