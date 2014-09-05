@@ -19,3 +19,7 @@ body {
 .goal{
 	background: lightgreen;
 }
+
+.active{
+	border: solid 5px black;
+}
