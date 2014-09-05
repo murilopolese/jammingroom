@@ -38,12 +38,15 @@
         $.get( url )
         .done( function( data ) {
           scale = data.scale;
+          data.scale.forEach( function( note ) {
+            scale.push( note + 12 );
+          });
         });
       });
       
       $( '.block' ).on( 'click', function( e ) {
         var index = $( e.target ).data( 'index' );
-        playMidi( scale[ index % 5 ], oscillator );
+        playMidi( scale[ index ], oscillator );
       });
 
       url = '';
