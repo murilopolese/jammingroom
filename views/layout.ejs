@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
   </head>
   <body>
     <%- body %>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/MIDIUtils.js"></script>
     <script type="text/javascript">
     $( document ).ready( function() {
+      
       $( 'button.submit' ).on( 'click', function() {
         var chords = $( 'textarea.chords' ).val() || 'C F G';
         chords.toUpperCase();
@@ -23,12 +26,56 @@
         .done( function( result ) {
           window.location.href = '/room/lobby/' + result.id
         })
-        .fail( function() {
-          alert( 'failed' );
+        .fail( function( error ) {
+          console.log( error );
         });
+      });
 
-      })
+      window.timeout = 0;
+      $( 'input.url' ).on( 'keyup', function( e ) {
+        url = $( e.target ).val();
+
+        clearTimeout( window.timeout );
+        window.timeout = setTimeout( function() {
+          $.get( url )
+          .done( function( data ) {
+            scale = data.scale;
+          });
+        }, 1000);
+
+      });
+      
+      $( '.block' ).on( 'click', function( e ) {
+        var index = $( e.target ).data( 'index' );
+        playMidi( scale[ index % 5 ], oscillator );
+      });
+
+      url = '';
+      scale = [];
+      context = new AudioContext();
+      oscillator = context.createOscillator();
+      oscillator.type = oscillator.SQUARE;
+      oscillator.frequency.value = 0;
+      oscillator.connect( context.destination );
+      oscillator.noteOn(0);
+
+      playNote = function( noteName, osc ) {
+        var midiNote = MIDIUtils.noteNameToNoteNumber( noteName );
+        playMidi( midiNote, osc );
+      }
+
+      playMidi = function( midiNote, osc ) {
+        var freq = MIDIUtils.noteNumberToFrequency( midiNote );
+        playFreq( freq, osc );
+      };
+
+      playFreq = function( freq, osc ) {
+        osc.frequency.value = freq;
+      };
+
     });
+
+
     </script>
   </body>
 </html>

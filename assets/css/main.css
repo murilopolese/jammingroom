@@ -1,0 +1,23 @@
+html{
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+.block {
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+.key1 { background: red }
+.key2 { background: blue }
+.key3 { background: green }
+.key4 { background: yellow }
+.key5 { background: cyan }
+
+
+.key6 { background: pink }
+.key7 { background: azure }
+.key8 { background: aqua }
+.key9 { background: blanchedalmond }
+.key10 { background: brown }
