@@ -15,6 +15,7 @@
     <script type="text/javascript" src="/js/fastclick.js"></script>
     <script type="text/javascript">
     $( document ).ready( function() {
+      FastClick.attach(document.body);
       
       $( 'button.submit' ).on( 'click', function() {
         var chords = $( 'textarea.chords' ).val() || 'C F G';
