@@ -12,6 +12,8 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/MIDIUtils.js"></script>
     <script type="text/javascript" src="/js/fastclick.js"></script>
+    <script type="text/javascript" src="/js/subcollider-min.js"></script>
+    <script type="text/javascript" src="/js/timbre.js"></script>
     <%- body %>
     <script type="text/javascript">
     $( document ).ready( function() {
@@ -35,8 +37,7 @@
       };
 
       playFreq = function( freq, osc ) {
-        // osc.frequency.linearRampToValueAtTime( freq, context.currentTime + 1 );
-        osc.frequency.setValueAtTime( freq, context.currentTime );
+        osc.freq = freq;
       };
 
     });
