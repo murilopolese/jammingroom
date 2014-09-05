@@ -33,18 +33,12 @@
         });
       });
 
-      window.timeout = 0;
-      $( 'input.url' ).on( 'keyup', function( e ) {
-        url = $( e.target ).val();
-
-        clearTimeout( window.timeout );
-        window.timeout = setTimeout( function() {
-          $.get( url )
-          .done( function( data ) {
-            scale = data.scale;
-          });
-        }, 1000);
-
+      $( 'button.set-scale' ).on( 'click', function() {
+        url = $( 'input.url' ).val();
+        $.get( url )
+        .done( function( data ) {
+          scale = data.scale;
+        });
       });
       
       $( '.block' ).on( 'click', function( e ) {
