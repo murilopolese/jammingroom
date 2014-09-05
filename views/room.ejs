@@ -1,0 +1,16 @@
+<div class="container">
+
+    <div class="row text-center">
+        <h1>This is your room</h1>
+        <p>Your chords are: <%= chords %></p>
+        <p>Scan this code to enter the Jam:</p>
+        <p><img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=http://jamroom.ngrok.com/room/<%= id %>&chld=H|0" /><p>
+        <p>
+        	Or share this url: 
+        	<a href="http://jamroom.ngrok.com/room/lobby/<%= id %>">
+        		http://jamroom.ngrok.com/room/lobby/<%= id %>
+        	</a>
+        </p>
+    </div>
+
+</div>

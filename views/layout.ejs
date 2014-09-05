@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Hack Day</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+  </head>
+  <body>
+    <%- body %>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $( document ).ready( function() {
+      $( 'button.submit' ).on( 'click', function() {
+        var chords = $( 'textarea.chords' ).val() || 'C F G';
+        chords.toUpperCase();
+        chords = chords.split( ' ' );
+        var data = {
+          chords: chords
+        }
+        $.post( '/room/create', data )
+        .done( function( result ) {
+          window.location.href = '/room/lobby/' + result.id
+        })
+        .fail( function() {
+          alert( 'failed' );
+        });
+
+      })
+    });
+    </script>
+  </body>
+</html>
