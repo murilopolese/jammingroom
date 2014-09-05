@@ -1,31 +1,84 @@
 <div class="row">
 	<% scale.forEach( function( note, i ) { %>
-		<div class="block n<%= i + 1 %>" data-midi="<%= note + 24 %>">
-
-    </div>
+		<div class="block n<%= i + 1 %>" data-midi="<%= note + 24 %>"></div>
 	<% }) %>
 </div>
 
 <div class="row">
 	<% scale.forEach( function( note, i ) { %>
-		<div class="block n<%= i + 7 %>" data-midi="<%= note + 36 %>">
-
-    </div>
+		<div class="block n<%= i + 6 %>" data-midi="<%= note + 36 %>"></div>
 	<% }) %>
+</div>
+
+<div class="highscore">
+
 </div>
 
 <script type="text/javascript">
   $( document ).ready( function() {
+    score = 0;
   	$( '.block' ).on( 'click', function( e ) {
       var midi = $( e.target ).data( 'midi' );
       playMidi( midi, oscillator );
     });
 
+    fakeScore = 0;
     $( '.block' ).on( 'click', function( e ) {
       if ( $( this ).hasClass('selected' )) {
         $( this ).removeClass('selected');
         $( this ).addClass('goal');
-      };
+        score += 10;
+        fakeScore += 10;
+      } else {
+        score -= 10;
+        fakeScore -= 10;
+      }
+      $( '.highscore' ).html( score );
+      if( fakeScore > 90 ) {
+        fakeScore = 0;
+        generateSteps();
+      }
+    });
+
+    $( "body" ).keypress(function( e ) {
+      if ( e.which == 13 ) {
+         e.preventDefault();
+      }
+
+      switch( e.keyCode ) {
+        case 97: // a
+          $( '.n1' ).trigger( 'click' );
+          break;
+        case 115: // s
+          $( '.n2' ).trigger( 'click' );
+          break;
+        case 100: // d
+          $( '.n3' ).trigger( 'click' );
+          break;
+        case 102: // f
+          $( '.n4' ).trigger( 'click' );
+          break;
+        case 103: // g
+          $( '.n5' ).trigger( 'click' );
+          break;
+        case 104: // h
+          $( '.n6' ).trigger( 'click' );
+          break;
+        case 106: // j
+          $( '.n7' ).trigger( 'click' );
+          break;
+        case 107: // k
+          $( '.n8' ).trigger( 'click' );
+          break;
+        case 108: // l
+          $( '.n9' ).trigger( 'click' );
+          break;
+        case 246: // ö
+          $( '.n10' ).trigger( 'click' );
+          break;
+        default:
+          break;
+      }
     });
 
     steps = [
@@ -33,12 +86,7 @@
       0, 0, 0, 0, 0, 0, 0, 0
     ];
 
-
-    steps.forEach( function( step, index ) {
-      if( Math.random() > 0.5 ) {
-        steps[ index ] = parseInt( Math.random() * 10 );
-      }
-    });
+    generateSteps();
 
     stepIndex = 0;
     setInterval( function() {
@@ -61,4 +109,12 @@
     oscillator.noteOn(0);
 
   });
+
+  var generateSteps = function() {
+    steps.forEach( function( step, index ) {
+      if( Math.random() > 0.5 ) {
+        steps[ index ] = parseInt( Math.random() * 10 );
+      }
+    });
+  }
 </script>

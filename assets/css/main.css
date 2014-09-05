@@ -6,6 +6,7 @@ body {
 }
 .block {
 	width: 20%;
+	max-width: 100px;
 	height: 100px;
 	float: left;
 	border: solid 1px black;
