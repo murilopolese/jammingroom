@@ -6,12 +6,6 @@
  */
 
 module.exports = {
-	chordWork: function( req, res ) {
-		Room.findOne( req.params.id )
-		.then( function( room ) {
-			res.view( 'chordWork', room );
-		})
-	},
 	simplest: function( req, res ) {
 		Room.findOne( req.params.id )
 		.then( function( room ) {
@@ -25,12 +19,6 @@ module.exports = {
 			room.generateScale();
 			res.view( 'reich', room );
 		})
-	},
-	chordsPlayer: function( req, res ) {
-		Room.findOne( req.params.id )
-		.then( function( room ) {
-			res.view( 'chordsPlayer', room );
-		})	
 	}
 };
 
