@@ -6,6 +6,20 @@
  */
 
 module.exports = {
+	veryBeginner: function( req, res ) {
+		Room.findOne( req.params.id )
+		.then( function( room ) {
+			room.generateScale();
+			res.view( 'veryBeginner', room );
+		})
+	},
+	player: function( req, res ) {
+		Room.findOne( req.params.id )
+		.then( function( room ) {
+			room.generateScale();
+			res.view( 'player', room );
+		})
+	},
 	simplest: function( req, res ) {
 		Room.findOne( req.params.id )
 		.then( function( room ) {

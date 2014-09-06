@@ -7,9 +7,9 @@ module.exports.routes = {
   '/play': {
   	view: 'play'
   },
-  'GET /chordWork/:id': 'InstrumentsController.chordWork',
+  'GET /veryBeginner/:id': 'InstrumentsController.veryBeginner',
+  'GET /player/:id': 'InstrumentsController.player',
   'GET /simplest/:id': 'InstrumentsController.simplest',
-  'GET /reich/:id': 'InstrumentsController.reich',
-  'GET /chords/:id': 'InstrumentsController.chordsPlayer'
+  'GET /reich/:id': 'InstrumentsController.reich'
 
 };

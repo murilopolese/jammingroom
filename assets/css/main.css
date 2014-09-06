@@ -3,23 +3,29 @@ html{
 }
 body {
   min-height: 100%;
+  background: #FBEFF4;
 }
+
+.col-md-6 {
+	padding: 0;
+}
+
 .block {
 	width: 20%;
-	max-width: 100px;
-	height: 100px;
+	height: 200px;
 	float: left;
-	border: solid 1px black;
+	border: solid 1px #EADEE3;
 }
 
 .selected{
-	background: red;
+	background: #25271E;
 }
 
 .goal{
-	background: lightgreen;
+	background: #D0E799;
 }
 
 .active{
-	border: solid 5px black;
+	border: solid 5px #EADEE3;
+	background: #D8C358;
 }

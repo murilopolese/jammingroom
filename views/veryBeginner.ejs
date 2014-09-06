@@ -12,20 +12,19 @@
         <div class="block n<%= i + 6 %>" data-midi="<%= note + 36 %>"></div>
       <% }) %>
     </div>
-
+    
     <h1 class="text-center">
       Your score: <span class="highscore">0</span>
     </h1>
   </div>
 </div>
 
-
 <script type="text/javascript">
   $( document ).ready( function() {
     score = 0;
   	$( '.block' ).on( 'click', function( e ) {
       var midi = $( e.target ).data( 'midi' );
-      oscillator.noteOn( midi, 80 );
+      // oscillator.noteOn( midi, 80 );
     });
 
     fakeScore = 0;
@@ -91,7 +90,7 @@
     });
 
     steps = [
-      // 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0
     ];
 
@@ -99,6 +98,10 @@
 
     stepIndex = 0;
     setInterval( function() {
+      var midi = $( '.goal' ).data( 'midi' );
+      oscillator.noteOn( midi, 80 );
+      $( '.block' ).removeClass( 'goal' );
+
       stepIndexMod = stepIndex % steps.length;
 
       if( steps[ stepIndexMod ] != 0 ) {
@@ -109,17 +112,17 @@
         }
       }
       stepIndex++;
-    }, 750 );
+    }, 750);
 
-  msec  = timbre.timevalue("bpm120 l8");
-  oscillator = T("OscGen", {env:T("perc", {r:msec, ar:true})});
-  oscillator.play();
-  T("delay", {
-      time: 500, 
-      fb:0.4, 
-      mix:0.4
-    }, oscillator
-  ).play();
+    msec  = timbre.timevalue("bpm120 l8");
+    oscillator = T("OscGen", {env:T("perc", {r:msec, ar:true})});
+    oscillator.play();
+    T("delay", {
+        time: 500, 
+        fb:0.4, 
+        mix:0.4
+      }, oscillator
+    ).play();
 
   });
 
@@ -127,8 +130,8 @@
     var last = 0;
     steps.forEach( function( step, index ) {
       if( Math.random() > 0.5 ) {
-        var range = parseInt( Math.random() * 6 );
-        last = Math.abs( ( last + ( 3 - range ) ) % 10 );
+        var range = parseInt( Math.random() * 4 );
+        last = Math.abs( ( last + ( 2 - range ) ) % 10 );
         steps[ index ] = last;
       }
     });
